@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="고1 공통수학2: 함수, 합성함수, 역함수의 핵심 개념과 수준별 연습문제 3개">
+<title>함수, 연결하고 되돌리다 | 공통수학2</title>
+<style>
+:root{--ink:#192d45;--muted:#53677d;--blue:#245dcc;--line:#dbe4ee;--paper:#fff;--soft:#edf3fc}*{box-sizing:border-box}body{margin:0;background:#f1f4f8;color:var(--ink);font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;line-height:1.65;word-break:keep-all}button,summary,a{-webkit-tap-highlight-color:transparent}button,summary{cursor:pointer}button:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid #d97706;outline-offset:4px}main{max-width:1020px;margin:32px auto;background:var(--paper);padding:40px 48px;border:1px solid var(--line);border-radius:20px;box-shadow:0 12px 48px #21375208}.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px}.eyebrow,.section-tag{font-size:12px;letter-spacing:.12em;font-weight:700;color:var(--blue)}button{font:inherit;border:1px solid var(--line);background:white;border-radius:8px;padding:7px 13px;color:var(--ink);font-size:13px}h1{font-size:clamp(28px,4vw,40px);line-height:1.3;letter-spacing:-.06em;margin:17px 0 10px}h1 span{color:var(--blue)}.intro{color:var(--muted);margin:0 0 24px;font-size:15px}.prereq{background:var(--soft);border-left:3px solid var(--blue);padding:13px 18px;font-size:13px;border-radius:0 8px 8px 0}.prereq strong{margin-right:9px}.prereq small{display:block;color:var(--muted);margin-top:4px}h2{font-size:21px;letter-spacing:-.04em;margin:25px 0 13px}.concepts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{border:1px solid var(--line);border-radius:12px;padding:18px;min-width:0}.card h3{margin:5px 0 9px;font-size:19px}.code{font-size:11px;color:var(--muted);letter-spacing:.01em}.card p{font-size:13px;margin:8px 0}.formula{font-family:Georgia,"Malgun Gothic",serif;font-size:18px;text-align:center;padding:9px;background:#f5f8fc;border-radius:7px;color:#184fa8}.note{color:var(--muted);font-size:12px!important}.diagram{width:100%;height:142px;display:block;margin:8px 0}svg text{font-family:"Malgun Gothic",sans-serif}.flow{display:flex;align-items:center;justify-content:center;gap:7px;margin:18px 0;font-size:15px}.flow b{border:1px solid #bfceed;border-radius:7px;padding:7px 9px;background:var(--soft)}.practice-header{display:flex;align-items:baseline;justify-content:space-between;gap:10px}.practice-header p{color:var(--muted);font-size:12px}.problem{display:grid;grid-template-columns:70px 1fr;gap:16px;border-top:1px solid var(--line);padding:16px 0}.level{display:inline-block;border-radius:6px;font-size:12px;font-weight:bold;padding:4px 9px;background:#eaf5f1;color:#236348}.level.mid{background:#edf3fc;color:#245dcc}.level.high{background:#f4edfb;color:#7045a0}.number{font-family:Georgia,serif;font-size:27px;display:block;margin-top:4px;color:#a0afc0}.question{font-size:14px;margin:0 0 8px}.question .code{display:block;margin-bottom:3px}details{font-size:13px}summary{color:var(--blue);font-weight:bold;width:fit-content;padding:3px 0}.answer{background:#f5f8fc;border-radius:8px;padding:10px 14px;margin-top:6px}.answer p{margin:0}.answer p+p{margin-top:4px;color:var(--muted)}.next{padding:13px 16px;border:1px solid var(--line);border-radius:8px;font-size:13px;margin-top:7px}.next strong{color:var(--blue)}footer{margin-top:22px;padding-top:14px;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}footer p{margin:3px 0}.skip{position:absolute;left:12px;top:-100px;background:white;padding:8px}.skip:focus{top:12px}
+@media(max-width:700px){main{margin:0;padding:24px 20px;border:0;border-radius:0}.concepts{grid-template-columns:1fr}.card{padding:18px}.diagram{height:160px}.practice-header{display:block}.practice-header p{margin-top:-7px}.problem{grid-template-columns:48px 1fr;gap:12px}.topbar{align-items:flex-start}.eyebrow{font-size:10px}.intro{font-size:14px}}
+@page{size:A4;margin:12mm}
+@media print{body{background:white;font-size:10pt}main{max-width:none;margin:0;padding:0;border:0;border-radius:0;box-shadow:none}.no-print,.skip{display:none!important}h1{font-size:27pt}.intro{font-size:10pt;margin-bottom:12px}.concepts{grid-template-columns:repeat(3,1fr);gap:10px}.card{padding:12px}.card p{font-size:9pt}.diagram{height:125px}.prereq{font-size:9pt}h2{margin-top:18px;font-size:16pt}.practice{break-before:page}.problem{padding:13px 0;break-inside:avoid}.question{font-size:11pt}details{font-size:10pt}details>summary{display:none}details>.answer{display:block!important}.card,.prereq,.next,footer{break-inside:avoid}.answer{border:1px solid var(--line)}footer{font-size:8pt}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<a href="#practice" class="skip">연습문제로 바로가기</a>
+<main>
+<header>
+<div class="topbar"><span class="eyebrow">COMMON MATH 2 · 고등학교 1학년</span><button class="no-print" id="print" type="button">인쇄 / PDF 저장</button></div>
+<h1>함수, <span>연결하고 되돌리다.</span></h1>
+<p class="intro">함수의 대응을 이해하고, 두 함수를 연결하고, 입력과 출력을 되돌려 봅시다.</p>
+<aside class="prereq"><strong>시작 전 떠올리기</strong>집합과 대응 · 일차함수의 함숫값 · 좌표와 그래프<br>예를 들어 y = 2x + 1에서 x = 1이면 y = 3, 그래프 위의 점은 (1, 3)입니다.<small>선수학습은 이 자료의 학습을 돕기 위한 권장 복습 내용입니다.</small></aside>
+</header>
+<section aria-labelledby="concept-title">
+<h2 id="concept-title">01 <span aria-hidden="true">/</span> 세 가지 핵심 개념</h2>
+<div class="concepts">
+<article class="card"><span class="code">[10공수2-03-01]</span><h3>함수 · 하나씩 대응</h3><p><strong>정의역의 각 원소</strong>에 공역의 원소가 <strong>오직 하나씩</strong> 대응하면 함수입니다.</p>
+<svg class="diagram" viewBox="0 0 250 142" role="img" aria-label="정의역 X의 1은 공역 Y의 3에, 2는 5에 대응한다. 공역은 3, 5, 7이고 치역은 3, 5이다."><ellipse cx="48" cy="70" rx="28" ry="45" fill="#edf3fc" stroke="#bdcdeb"/><ellipse cx="193" cy="70" rx="32" ry="56" fill="#f5f8fc" stroke="#bdcdeb"/><g font-size="12" fill="#192d45" text-anchor="middle"><text x="48" y="14">정의역 X</text><text x="193" y="10">공역 Y</text><text x="48" y="55">1</text><text x="48" y="93">2</text><text x="193" y="42">3</text><text x="193" y="76">5</text><text x="193" y="110">7</text><text x="120" y="138">치역 = {3, 5}</text></g><g stroke="#245dcc" fill="none" stroke-width="1.6"><path d="M63 51L175 38m-7-3 7 3-6 5M63 89L175 72m-7-3 7 3-6 5"/></g></svg>
+<p><strong>정의역</strong>은 입력 전체, <strong>공역</strong>은 출력이 속하도록 정한 집합, <strong>치역</strong>은 실제 출력의 집합입니다.</p><p class="note">그래프는 (x, f(x))인 점들의 모임입니다. 아래 그래프에서 y = 2x + 1 위의 점 (1, 3)을 찾아보세요.</p>
+<svg class="diagram" viewBox="0 0 250 142" role="img" aria-label="일차함수 y=2x+1 그래프. y절편은 1이고 점 (1,3)을 지난다."><path d="M30 112H225M75 133V8" stroke="#9aaabd"/><path d="M51 133.47L116 12.13" stroke="#245dcc" stroke-width="2"/><path d="M100 112V42H75" stroke="#b3c7e7" stroke-dasharray="3 3" fill="none"/><circle cx="100" cy="42" r="4" fill="#245dcc"/><g fill="#53677d" font-size="11"><text x="63" y="125">0</text><text x="225" y="126">x</text><text x="62" y="12">y</text><text x="99" y="125">1</text><text x="61" y="46">3</text><text x="61" y="92">1</text><text x="108" y="40">(1, 3)</text><text x="138" y="24">y = 2x + 1</text></g></svg></article>
+<article class="card"><span class="code">[10공수2-03-02]</span><h3>합성함수 · 연결하기</h3><p>한 함수의 출력을 다음 함수의 입력으로 사용합니다. <strong>오른쪽 함수부터</strong> 적용합니다.</p><div class="formula">(g ∘ f)(x) = g(f(x))</div><div class="flow" aria-label="x에 f를 적용한 뒤 g를 적용한다"><span>x</span> → <b>f</b> → <b>g</b> → <span>g(f(x))</span></div><p>f(x) = x + 1, g(x) = 2x라면</p><div class="formula">x → x + 1 → 2x + 2</div><p>따라서 (g ∘ f)(x) = 2x + 2입니다.</p><p class="note">f의 출력이 g의 정의역에 속해야 연결할 수 있습니다. 일반적으로 g ∘ f와 f ∘ g는 서로 다릅니다.</p></article>
+<article class="card"><span class="code">[10공수2-03-03]</span><h3>역함수 · 되돌리기</h3><p>입력과 출력을 바꾸는 함수입니다. 원래 함수가 <strong>일대일대응</strong>이면 역함수가 존재합니다.</p><p class="note">서로 다른 입력의 출력이 다르고, 치역이 공역 전체와 같아야 합니다.</p><div class="formula">f(a) = b ⇔ f⁻¹(b) = a</div><p>y = 2x − 3에서 x와 y를 바꾼 뒤 y에 대해 풀면</p><div class="formula">f⁻¹(x) = (x + 3) / 2</div>
+<svg class="diagram" viewBox="0 0 250 142" role="img" aria-label="y=2x-3과 역함수 y=(x+3)/2의 그래프는 y=x에 대칭이며 (3,3)에서 만난다."><path d="M25 116H225M48 135V8" stroke="#9aaabd"/><path d="M30 134L155 9" stroke="#9aaabd" stroke-dasharray="4 4"/><path d="M72 134L134 10" stroke="#245dcc" stroke-width="2"/><path d="M30 92L220 -3" stroke="#8a52b2" stroke-width="2"/><circle cx="114" cy="50" r="4" fill="#192d45"/><g fill="#53677d" font-size="10"><text x="36" y="129">0</text><text x="223" y="128">x</text><text x="36" y="12">y</text><text x="120" y="63">(3, 3)</text><text x="157" y="12">y = x</text><text x="148" y="83" fill="#245dcc">원래 함수</text><text x="148" y="99" fill="#8a52b2">역함수</text></g></svg><p class="note">두 그래프는 직선 y = x에 대칭입니다. f⁻¹(x)는 1/f(x)와 다릅니다.</p></article>
+</div></section>
+<section class="practice" id="practice" aria-labelledby="practice-title"><div class="practice-header"><h2 id="practice-title">02 / 내 힘으로 확인하기</h2><p>먼저 풀고, 정답·풀이를 펼쳐 확인하세요.</p></div>
+<article class="problem"><div><span class="level">기초</span><span class="number">01</span></div><div><p class="question"><span class="code">[10공수2-03-01] 함수와 그래프</span>f(x) = 2x + 1에서 <strong>f(2)</strong>와 그래프 위 <strong>x = 2인 점의 좌표</strong>를 구하시오.</p><details><summary>정답·풀이 보기</summary><div class="answer"><p><strong>정답: f(2) = 5, 좌표는 (2, 5)</strong></p><p>x에 2를 대입하면 2 × 2 + 1 = 5입니다. 그래프 위의 점은 (입력, 출력)으로 나타냅니다.</p></div></details></div></article>
+<article class="problem"><div><span class="level mid">기본</span><span class="number">02</span></div><div><p class="question"><span class="code">[10공수2-03-02] 합성함수</span>f(x) = x + 1, g(x) = 2x일 때 <strong>(g ∘ f)(x)</strong>와 <strong>(f ∘ g)(x)</strong>를 구하시오. (정의역과 공역은 실수 전체)</p><details><summary>정답·풀이 보기</summary><div class="answer"><p><strong>정답: (g ∘ f)(x) = 2x + 2, (f ∘ g)(x) = 2x + 1</strong></p><p>g(f(x)) = 2(x + 1), f(g(x)) = 2x + 1입니다. 연결 순서를 바꾸면 결과도 달라집니다.</p></div></details></div></article>
+<article class="problem"><div><span class="level high">도전</span><span class="number">03</span></div><div><p class="question"><span class="code">[10공수2-03-03] 역함수</span>실수 전체에서 실수 전체로의 함수 f(x) = 2x − 3의 <strong>역함수</strong>를 구하고, 두 그래프의 <strong>교점</strong>을 구하시오.</p><details><summary>정답·풀이 보기</summary><div class="answer"><p><strong>정답: f⁻¹(x) = (x + 3) / 2, 교점은 (3, 3)</strong></p><p>일대일대응이므로 역함수가 존재합니다. x = 2y − 3을 y에 대해 풀면 y = (x + 3) / 2입니다. 교점에서는 2x − 3 = (x + 3) / 2이므로 4x − 6 = x + 3, x = 3, y = 3입니다.</p></div></details></div></article>
+<aside class="next"><strong>다음 시간 →</strong> 합성함수와 역함수의 관계를 더 연습합니다. f⁻¹(f(x))가 왜 x인지 생각해 보세요.</aside>
+</section>
+<footer><p><strong>교육과정 근거 · 2022 개정 공통수학2</strong></p><p>[10공수2-03-01] 함수의 개념을 설명하고, 그 그래프를 이해한다.<br>[10공수2-03-02] 함수의 합성을 설명하고, 합성함수를 구할 수 있다.<br>[10공수2-03-03] 역함수의 개념을 설명하고, 역함수를 구할 수 있다.</p><p>출처: 교육과정 MCP 공식 원문(officialText) · 교육부 고시 제2022-33호 [별책 8] 수학과 교육과정, PDF 73쪽.<br>설명·그림·문제는 위 성취기준에 맞추어 제작한 학습자료입니다.</p></footer>
+</main>
+<script>
+(() => {
+  const answers = Array.from(document.querySelectorAll('details'));
+  let previousState = null;
+  window.addEventListener('beforeprint', () => {
+    if (previousState === null) previousState = answers.map(answer => answer.open);
+    answers.forEach(answer => { answer.open = true; });
+  });
+  window.addEventListener('afterprint', () => {
+    if (previousState !== null) answers.forEach((answer, index) => { answer.open = previousState[index]; });
+    previousState = null;
+  });
+  document.getElementById('print').addEventListener('click', () => window.print());
+})();
+</script>
+</body>
+</html>
