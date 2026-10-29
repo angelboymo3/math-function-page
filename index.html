@@ -11,6 +11,12 @@
 @page{size:A4;margin:12mm}
 @media print{body{background:white;font-size:10pt}main{max-width:none;margin:0;padding:0;border:0;border-radius:0;box-shadow:none}.no-print,.skip{display:none!important}h1{font-size:27pt}.intro{font-size:10pt;margin-bottom:12px}.concepts{grid-template-columns:repeat(3,1fr);gap:10px}.card{padding:12px}.card p{font-size:9pt}.diagram{height:125px}.prereq{font-size:9pt}h2{margin-top:18px;font-size:16pt}.practice{break-before:page}.problem{padding:13px 0;break-inside:avoid}.question{font-size:11pt}details{font-size:10pt}details>summary{display:none}details>.answer{display:block!important}.card,.prereq,.next,footer{break-inside:avoid}.answer{border:1px solid var(--line)}footer{font-size:8pt}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
+
+<style id="graph-styles">
+.graph-lab{margin:26px 0;padding:20px;border:1px solid var(--line);border-radius:12px;background:#fafcff}.graph-lab h2{margin-top:0}.graph-controls{display:grid;grid-template-columns:1fr 1fr;gap:12px}.graph-field{min-width:0}.graph-field label{display:block;font-size:14px;font-weight:bold;margin-bottom:5px}.graph-field input,.graph-field select{width:100%;min-width:0;min-height:44px;padding:9px;border:1px solid #9cacc0;border-radius:6px;font:inherit;font-size:16px;background:white;color:var(--ink)}.graph-lab button{min-height:44px;background:var(--blue);color:white}.graph-actions{display:flex;align-items:center;gap:12px;margin:12px 0}.graph-error{color:#a32121;font-size:14px}.graph-field [aria-invalid=true]{border:2px solid #a32121}.graph-field [hidden]{display:none}.graph-lab [hidden]{display:none!important}.graph-output{overflow-wrap:anywhere}.graph-output p{margin:6px 0}.graph-svg{display:block;width:100%;max-width:560px;height:auto;margin:12px auto;background:white;border:1px solid var(--line)}.graph-legend{display:flex;flex-wrap:wrap;gap:10px 20px;font-size:14px}.graph-key{display:inline-block;width:26px;margin-right:6px;vertical-align:middle;border-top:3px solid}.graph-table{border-collapse:collapse;width:100%;text-align:center;font-size:14px;table-layout:fixed}.graph-table th,.graph-table td{border:1px solid var(--line);padding:7px 2px;overflow-wrap:anywhere}.graph-lab :focus-visible{outline:3px solid #d97706;outline-offset:3px}
+@media(max-width:700px){.graph-lab{padding:12px}.graph-controls{grid-template-columns:1fr}.graph-actions{align-items:stretch;flex-direction:column}}
+@media print{.graph-controls,.graph-actions,.graph-help{display:none}.graph-lab{background:white;padding:10px}.graph-svg{max-width:100mm;break-inside:avoid}.graph-legend{break-inside:avoid}}
+</style>
 </head>
 <body>
 <a href="#practice" class="skip">연습문제로 바로가기</a>
@@ -32,11 +38,55 @@
 <article class="card"><span class="code">[10공수2-03-03]</span><h3>역함수 · 되돌리기</h3><p>입력과 출력을 바꾸는 함수입니다. 원래 함수가 <strong>일대일대응</strong>이면 역함수가 존재합니다.</p><p class="note">서로 다른 입력의 출력이 다르고, 치역이 공역 전체와 같아야 합니다.</p><div class="formula">f(a) = b ⇔ f⁻¹(b) = a</div><p>y = 2x − 3에서 x와 y를 바꾼 뒤 y에 대해 풀면</p><div class="formula">f⁻¹(x) = (x + 3) / 2</div>
 <svg class="diagram" viewBox="0 0 250 142" role="img" aria-label="y=2x-3과 역함수 y=(x+3)/2의 그래프는 y=x에 대칭이며 (3,3)에서 만난다."><path d="M25 116H225M48 135V8" stroke="#9aaabd"/><path d="M30 134L155 9" stroke="#9aaabd" stroke-dasharray="4 4"/><path d="M72 134L134 10" stroke="#245dcc" stroke-width="2"/><path d="M30 92L220 -3" stroke="#8a52b2" stroke-width="2"/><circle cx="114" cy="50" r="4" fill="#192d45"/><g fill="#53677d" font-size="10"><text x="36" y="129">0</text><text x="223" y="128">x</text><text x="36" y="12">y</text><text x="120" y="63">(3, 3)</text><text x="157" y="12">y = x</text><text x="148" y="83" fill="#245dcc">원래 함수</text><text x="148" y="99" fill="#8a52b2">역함수</text></g></svg><p class="note">두 그래프는 직선 y = x에 대칭입니다. f⁻¹(x)는 1/f(x)와 다릅니다.</p></article>
 </div></section>
+
+<section class="graph-lab" id="graph-lab" aria-labelledby="graph-heading">
+<h2 id="graph-heading">함수 그래프 탐색</h2>
+<p class="note">[10공수2-03-01] 함수 · [10공수2-03-02] 합성함수 · [10공수2-03-03] 역함수</p>
+<form id="graph-form" novalidate>
+<div class="graph-controls">
+<div class="graph-field"><label for="graph-mode">학습 단원</label><select id="graph-mode"><option value="function">함수</option><option value="composition">합성함수</option><option value="inverse">역함수</option></select></div>
+<div class="graph-field"><label for="graph-example">예시 선택 (f)</label><select id="graph-example"></select></div>
+<div class="graph-field"><label for="graph-f">함수식 f(x)</label><input id="graph-f" value="2x+1" maxlength="80" autocomplete="off" spellcheck="false" aria-describedby="graph-help graph-f-error"><span class="graph-error" id="graph-f-error"></span></div>
+<div class="graph-field" id="graph-g-field" hidden><label for="graph-g">함수식 g(x)</label><input id="graph-g" value="2x" maxlength="80" autocomplete="off" spellcheck="false" aria-describedby="graph-help graph-g-error"><span class="graph-error" id="graph-g-error"></span></div>
+</div>
+<p class="note graph-help" id="graph-help">일차식·상수식만 입력하세요: y = 2x + 1, −x + 2, 0.5*x − 1, 3. 분수·괄호·거듭제곱은 지원하지 않습니다. 정의역과 공역은 실수 전체입니다.</p>
+<div class="graph-actions"><button type="submit">그래프 그리기</button><span id="graph-status" role="status" aria-live="polite"></span></div>
+</form>
+<div class="graph-output" id="graph-output" hidden>
+<div id="graph-equations"></div><div class="graph-legend" id="graph-legend"></div>
+<svg id="graph-svg" class="graph-svg" viewBox="0 0 440 440" role="img" aria-labelledby="graph-svg-title graph-svg-desc"></svg>
+<p class="note">표시 범위는 두 축 모두 −10~10입니다. 화면 밖에서도 함수는 이어집니다. 소수는 최대 네 자리로 표시하며, 반올림한 값에는 ≈를 붙입니다.</p>
+<div id="graph-notes"></div><div id="graph-table"></div>
+</div>
+<noscript><p>그래프 탐색 기능을 사용하려면 JavaScript를 켜 주세요. 기존 개념과 문제는 아래에서 읽을 수 있습니다.</p></noscript>
+</section>
 <section class="practice" id="practice" aria-labelledby="practice-title"><div class="practice-header"><h2 id="practice-title">02 / 내 힘으로 확인하기</h2><p>먼저 풀고, 정답·풀이를 펼쳐 확인하세요.</p></div>
 <article class="problem"><div><span class="level">기초</span><span class="number">01</span></div><div><p class="question"><span class="code">[10공수2-03-01] 함수와 그래프</span>f(x) = 2x + 1에서 <strong>f(2)</strong>와 그래프 위 <strong>x = 2인 점의 좌표</strong>를 구하시오.</p><details><summary>정답·풀이 보기</summary><div class="answer"><p><strong>정답: f(2) = 5, 좌표는 (2, 5)</strong></p><p>x에 2를 대입하면 2 × 2 + 1 = 5입니다. 그래프 위의 점은 (입력, 출력)으로 나타냅니다.</p></div></details></div></article>
 <article class="problem"><div><span class="level mid">기본</span><span class="number">02</span></div><div><p class="question"><span class="code">[10공수2-03-02] 합성함수</span>f(x) = x + 1, g(x) = 2x일 때 <strong>(g ∘ f)(x)</strong>와 <strong>(f ∘ g)(x)</strong>를 구하시오. (정의역과 공역은 실수 전체)</p><details><summary>정답·풀이 보기</summary><div class="answer"><p><strong>정답: (g ∘ f)(x) = 2x + 2, (f ∘ g)(x) = 2x + 1</strong></p><p>g(f(x)) = 2(x + 1), f(g(x)) = 2x + 1입니다. 연결 순서를 바꾸면 결과도 달라집니다.</p></div></details></div></article>
 <article class="problem"><div><span class="level high">도전</span><span class="number">03</span></div><div><p class="question"><span class="code">[10공수2-03-03] 역함수</span>실수 전체에서 실수 전체로의 함수 f(x) = 2x − 3의 <strong>역함수</strong>를 구하고, 두 그래프의 <strong>교점</strong>을 구하시오.</p><details><summary>정답·풀이 보기</summary><div class="answer"><p><strong>정답: f⁻¹(x) = (x + 3) / 2, 교점은 (3, 3)</strong></p><p>일대일대응이므로 역함수가 존재합니다. x = 2y − 3을 y에 대해 풀면 y = (x + 3) / 2입니다. 교점에서는 2x − 3 = (x + 3) / 2이므로 4x − 6 = x + 3, x = 3, y = 3입니다.</p></div></details></div></article>
 <aside class="next"><strong>다음 시간 →</strong> 합성함수와 역함수의 관계를 더 연습합니다. f⁻¹(f(x))가 왜 x인지 생각해 보세요.</aside>
+</section>
+<section id="rational-function" aria-labelledby="rational-title">
+<h2 id="rational-title">03 / 유리함수 · 그래프와 성질</h2>
+<aside class="prereq"><strong>[10공수2-03-04] 성취기준</strong>유리함수 y = (ax + b)/(cx + d)의 그래프를 그릴 수 있고, 그 그래프의 성질을 탐구할 수 있다.<small>근거: 교육과정 MCP 공식 원문(officialText) · 교육부 고시 제2022-33호 [별책 8] 수학과 교육과정, PDF 73쪽, 공통수학2 &gt; 함수와 그래프.</small></aside>
+<article class="card">
+<h3>분모의 제한과 평행이동으로 이해하기</h3>
+<p>유리함수는 다항식의 비로 나타낼 수 있는 함수입니다. 정의역을 따로 정하지 않으면 <strong>분모가 0이 되지 않는 모든 실수</strong>를 정의역으로 합니다.</p>
+<div class="formula">y = k / (x − p) + q &nbsp; (k ≠ 0)</div>
+<p>이 그래프는 y = k / x의 그래프를 x축 방향으로 p만큼, y축 방향으로 q만큼 평행이동한 것입니다. <strong>정의역은 {x ∈ ℝ | x ≠ p}, 치역은 {y ∈ ℝ | y ≠ q}</strong>이고, 두 점근선은 <strong>x = p, y = q</strong>입니다. 그래프는 점 (p, q)에 대하여 대칭입니다.</p>
+<p>점근선은 그래프가 한없이 가까워지는 직선입니다. 이 형태에서는 x가 p에 가까워질 때 함숫값의 절댓값이 한없이 커지고, x의 절댓값이 한없이 커질 때 y가 q에 가까워집니다. 그래프는 두 점근선과 만나지 않습니다.</p>
+<p>k &gt; 0이면 x &gt; p에서 y &gt; q, x &lt; p에서 y &lt; q입니다. k &lt; 0이면 그 위치가 반대입니다. 점근선을 먼저 그리고, 몇 개의 점을 표시한 뒤 두 곡선을 부드럽게 이어 그립니다.</p>
+<p class="note">y = (ax + b)/(cx + d)에서 c ≠ 0, ad − bc ≠ 0이면 p = −d/c, q = a/c, k = (bc − ad)/c²로 위 형태를 얻습니다. ad − bc = 0이면 정의역에서 일정한 값을 갖는 함수이므로 위 쌍곡선의 성질을 그대로 적용하지 않습니다.</p>
+</article>
+<article class="problem"><div><span class="level mid">기본</span><span class="number">04</span></div><div>
+<p class="question"><span class="code">[10공수2-03-04] 유리함수</span>유리함수 <strong>y = (2x + 1) / (x − 1)</strong>의 정의역, 치역, 두 점근선을 구하고, 좌표축과 만나는 점을 표시하여 그래프의 개형을 그리시오. (정의역은 식이 정의되는 모든 실수)</p>
+<details><summary>정답·풀이 보기</summary><div class="answer">
+<p><strong>정답: 정의역 {x ∈ ℝ | x ≠ 1}, 치역 {y ∈ ℝ | y ≠ 2}, 점근선 x = 1과 y = 2. x축과의 교점은 (−1/2, 0), y축과의 교점은 (0, −1)입니다.</strong></p>
+<p>2x + 1 = 2(x − 1) + 3이므로 y = 2 + 3 / (x − 1)입니다. y = 3 / x의 그래프를 x축 방향으로 1만큼, y축 방향으로 2만큼 평행이동합니다. 분모 때문에 x ≠ 1이고, 3 / (x − 1)은 0이 될 수 없으므로 y ≠ 2입니다. 반대로 y ≠ 2인 모든 실수에 대해 x = 1 + 3 / (y − 2)를 택할 수 있으므로 치역은 2를 제외한 모든 실수입니다.</p>
+<p>y = 0이면 2x + 1 = 0에서 x = −1/2이며 분모는 0이 아닙니다. x = 0이면 y = −1입니다. 점근선 x = 1, y = 2를 점선으로 그리고, 왼쪽 아래 가지에는 (−1/2, 0), (0, −1)을, 오른쪽 위 가지에는 (2, 5), (4, 3)을 표시합니다. 점 (1, 2)를 중심으로 대칭인 두 가지를 점근선에 가까워지도록 그립니다.</p>
+<p>검산: x = 2일 때 원래 식은 (4 + 1)/(2 − 1) = 5이고, 변형한 식도 2 + 3/(2 − 1) = 5입니다. x = 4일 때도 두 식의 값은 모두 3입니다.</p>
+</div></details></div></article>
+<p class="note">위 성취기준 원문을 바탕으로 설명과 문제·풀이를 제작했습니다.</p>
 </section>
 <footer><p><strong>교육과정 근거 · 2022 개정 공통수학2</strong></p><p>[10공수2-03-01] 함수의 개념을 설명하고, 그 그래프를 이해한다.<br>[10공수2-03-02] 함수의 합성을 설명하고, 합성함수를 구할 수 있다.<br>[10공수2-03-03] 역함수의 개념을 설명하고, 역함수를 구할 수 있다.</p><p>출처: 교육과정 MCP 공식 원문(officialText) · 교육부 고시 제2022-33호 [별책 8] 수학과 교육과정, PDF 73쪽.<br>설명·그림·문제는 위 성취기준에 맞추어 제작한 학습자료입니다.</p></footer>
 </main>
@@ -53,6 +103,74 @@
     previousState = null;
   });
   document.getElementById('print').addEventListener('click', () => window.print());
+})();
+</script>
+
+<script id="graph-script">
+(() => {
+'use strict';
+function parseAffine(raw, name = 'f') {
+  if (!raw.trim()) throw new Error('함수식을 입력하세요. 예: 2x+1');
+  if (raw.length > 80) throw new Error('80자 이내로 입력하세요.');
+  let s = raw.replace(/−/g, '-').replace(/\s+/g, '');
+  s = s.replace(new RegExp('^(?:y|' + name + '\\(x\\))='), '');
+  const n = '(?:\\d+(?:\\.\\d*)?|\\.\\d+)';
+  const linear = new RegExp('^([+-]?)(?:(' + n + ')\\*?)?x(?:([+-])(' + n + '))?$');
+  const constant = new RegExp('^[+-]?' + n + '$');
+  const match = s.match(linear);
+  let a, b;
+  if (match) { a = (match[1] === '-' ? -1 : 1) * (match[2] === undefined ? 1 : Number(match[2])); b = match[4] === undefined ? 0 : (match[3] === '-' ? -1 : 1) * Number(match[4]); }
+  else if (constant.test(s)) { a = 0; b = Number(s); }
+  else throw new Error('ax+b 또는 상수 형태를 입력하세요. 예: −x+2, 0.5*x−1, 3');
+  return finite({a,b});
+}
+function finite(line) { if (!Number.isFinite(line.a) || !Number.isFinite(line.b)) throw new Error('계산값이 너무 큽니다. 더 작은 수를 입력하세요.'); return line; }
+function compose(outer, inner) { return finite({a:outer.a*inner.a,b:outer.a*inner.b+outer.b}); }
+function inverse(f) { return f.a === 0 ? null : finite({a:1/f.a,b:-f.b/f.a}); }
+function evaluate(f,x) { const y=f.a*x+f.b; if(!Number.isFinite(y)) throw new Error('계산값이 너무 큽니다. 더 작은 수를 입력하세요.'); return y; }
+function format(n) { const rounded = Math.round(n*1e4)/1e4; if (!Number.isFinite(rounded)) return String(n); return (rounded === n ? '' : '≈') + String(Object.is(rounded,-0)?0:rounded); }
+function expression(f) { if(f.a===0) return format(f.b); const first=f.a===1?'x':f.a===-1?'−x':format(f.a)+'x'; return first+(f.b===0?'':f.b<0?' − '+format(-f.b):' + '+format(f.b)); }
+function toPixel(x,y) { return {x:220+18*x,y:220-18*y}; }
+function clipLine(f) {
+  const points=[];
+  const add=(x,y)=> {if(Number.isFinite(x)&&Number.isFinite(y)&&x>=-10-1e-9&&x<=10+1e-9&&y>=-10-1e-9&&y<=10+1e-9&&!points.some(p=>Math.abs(p.x-x)<1e-9&&Math.abs(p.y-y)<1e-9))points.push({x:Math.max(-10,Math.min(10,x)),y:Math.max(-10,Math.min(10,y))});};
+  add(-10,f.a*(-10)+f.b); add(10,f.a*10+f.b);
+  if(f.a!==0) {add((-10-f.b)/f.a,-10);add((10-f.b)/f.a,10);}
+  return points.slice(0,2);
+}
+const $=id=>document.getElementById(id), mode=$('graph-mode'), example=$('graph-example'), fInput=$('graph-f'), gInput=$('graph-g');
+const palette=[{color:'#245dcc',dash:''},{color:'#8a3e9e',dash:'10 5'},{color:'#53677d',dash:'3 5'}];
+function element(tag,text,parent) {const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(parent)parent.append(e);return e;}
+function svgElement(tag,attrs,parent,text) {const e=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const [k,v]of Object.entries(attrs))e.setAttribute(k,v);if(text!==undefined)e.textContent=text;parent.append(e);return e;}
+function render(lines,notes,values) {
+ const svg=$('graph-svg');svg.replaceChildren();$('graph-equations').replaceChildren();$('graph-legend').replaceChildren();$('graph-notes').replaceChildren();$('graph-table').replaceChildren();
+ svgElement('title',{id:'graph-svg-title'},svg,'함수 그래프');
+ svgElement('desc',{id:'graph-svg-desc'},svg,lines.map(l=>l.label+': y = '+expression(l)).join('. ')+'. 두 축의 표시 범위는 -10부터 10이며 단위 길이가 같습니다.');
+ const defs=svgElement('defs',{},svg);const clip=svgElement('clipPath',{id:'graph-clip'},defs);svgElement('rect',{x:40,y:40,width:360,height:360},clip);
+ for(let n=-10;n<=10;n+=2){const p=toPixel(n,n);svgElement('line',{x1:p.x,y1:40,x2:p.x,y2:400,stroke:n===0?'#53677d':'#e2e8f0'},svg);svgElement('line',{x1:40,y1:p.y,x2:400,y2:p.y,stroke:n===0?'#53677d':'#e2e8f0'},svg);if(n!==0){svgElement('text',{x:p.x,y:421,'text-anchor':'middle','font-size':15,fill:'#53677d'},svg,String(n));svgElement('text',{x:33,y:p.y+5,'text-anchor':'end','font-size':15,fill:'#53677d'},svg,String(n));}}
+ svgElement('text',{x:224,y:236,'font-size':15},svg,'0');svgElement('text',{x:406,y:216,'font-size':16},svg,'x');svgElement('text',{x:226,y:30,'font-size':16},svg,'y');
+ const group=svgElement('g',{'clip-path':'url(#graph-clip)'},svg);
+ lines.forEach((line,i)=>{const style=palette[line.label==='대칭 기준 y = x'?2:i];element('p',line.label+': y = '+expression(line),$('graph-equations'));const item=element('span',undefined,$('graph-legend'));const key=element('span',undefined,item);key.className='graph-key';key.style.borderColor=style.color;key.style.borderTopStyle=style.dash==='3 5'?'dotted':style.dash?'dashed':'solid';item.append(document.createTextNode(line.label));const ends=clipLine(line);if(ends.length===2){const p=toPixel(ends[0].x,ends[0].y),q=toPixel(ends[1].x,ends[1].y);svgElement('line',{x1:p.x,y1:p.y,x2:q.x,y2:q.y,stroke:style.color,'stroke-width':3,'stroke-dasharray':style.dash,'vector-effect':'non-scaling-stroke'},group);}else if(ends.length===1){const p=toPixel(ends[0].x,ends[0].y);svgElement('circle',{cx:p.x,cy:p.y,r:3,fill:style.color},group);}else notes.push(line.label+': 현재 표시 범위 밖에 있습니다.');});
+ for(let i=0;i<lines.length;i++)for(let j=i+1;j<lines.length;j++)if(lines[i].a===lines[j].a&&lines[i].b===lines[j].b)notes.push(lines[i].label+'와 '+lines[j].label+'는 같은 그래프입니다.');
+ notes.forEach(note=>element('p',note,$('graph-notes')));
+ if(values){const table=element('table',undefined,$('graph-table'));table.className='graph-table';element('caption','입력과 함숫값',table);const body=element('tbody',undefined,table);for(const [label,list]of [['x',[-2,-1,0,1,2]],['f(x)',values]]){const row=element('tr',undefined,body);const th=element('th',label,row);th.scope='row';list.forEach(n=>element('td',format(n),row));}}
+ $('graph-output').hidden=false;
+}
+function draw() {
+ $('graph-output').hidden=true;$('graph-svg').replaceChildren();$('graph-equations').replaceChildren();$('graph-legend').replaceChildren();$('graph-notes').replaceChildren();$('graph-table').replaceChildren();
+ for(const name of ['f','g']){$('graph-'+name+'-error').textContent='';$('graph-'+name).removeAttribute('aria-invalid');}
+ let f,g,invalid=false;
+ for(const name of mode.value==='composition'?['f','g']:['f']){try{const result=parseAffine($('graph-'+name).value,name);if(name==='f')f=result;else g=result;}catch(e){$('graph-'+name+'-error').textContent=e.message;$('graph-'+name).setAttribute('aria-invalid','true');invalid=true;}}
+ if(invalid){$('graph-status').textContent='입력 내용을 확인하세요.';return;}
+ try{let lines,notes=[],values=null;
+ if(mode.value==='function'){lines=[{...f,label:'f(x)'}];values=[-2,-1,0,1,2].map(x=>evaluate(f,x));}
+ else if(mode.value==='composition'){lines=[{...compose(g,f),label:'(g ∘ f)(x)'},{...compose(f,g),label:'(f ∘ g)(x)'}];notes.push('f(x) = '+expression(f)+' , g(x) = '+expression(g)+'. 합성은 오른쪽 함수부터 적용합니다.');}
+ else {const inv=inverse(f);lines=[{...f,label:'원함수 f(x)'}];if(inv)lines.push({...inv,label:'역함수 f⁻¹(x)'});lines.push({a:1,b:0,label:'대칭 기준 y = x'});notes.push(inv?'원함수 위의 (u, v)는 역함수 위의 (v, u)에 대응하며 두 그래프는 y = x에 대칭입니다.':'일대일대응이 아니므로 역함수가 없습니다.');}
+ render(lines,notes,values);$('graph-status').textContent='그래프를 그렸습니다.';
+ }catch(e){$('graph-status').textContent=e.message;}
+}
+function resetMode(){const m=mode.value;fInput.value=m==='inverse'?'2x-3':m==='composition'?'x+1':'2x+1';gInput.value='2x';$('graph-g-field').hidden=m!=='composition';example.replaceChildren();const choices=[['','직접 입력'],['2x+1','y = 2x + 1'],['-x+2','y = −x + 2'],['x','y = x'],['3','y = 3']];if(m==='inverse')choices.push(['2x-3','y = 2x − 3']);if(m==='composition')choices.push(['x+1','y = x + 1']);for(const [value,label]of choices){const option=element('option',label,example);option.value=value;}example.value=fInput.value;draw();}
+$('graph-form').addEventListener('submit',event=>{event.preventDefault();draw();});mode.addEventListener('change',resetMode);example.addEventListener('change',()=>{if(example.value){fInput.value=example.value;draw();}});fInput.addEventListener('input',()=>{example.value='';});resetMode();
 })();
 </script>
 </body>
